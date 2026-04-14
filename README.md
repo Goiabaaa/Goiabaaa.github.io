@@ -1,1 +1,1037 @@
 # Goiabaaa.github.io
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BYD Dolphin Mini vs Cobalt LTZ 2014 — Análise para Uber</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;700&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #080e1a;
+    --surface: #0f1a2e;
+    --surface2: #132035;
+    --byd: #00e5a0;
+    --byd-dim: #00e5a020;
+    --byd-mid: #00c98b;
+    --cobalt: #ff5c35;
+    --cobalt-dim: #ff5c3520;
+    --cobalt-mid: #e0441f;
+    --gold: #ffd166;
+    --text: #e8f0fe;
+    --muted: #7a90b0;
+    --border: #1e3050;
+    --white: #ffffff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    padding: 0;
+  }
+
+  .page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 30px 60px;
+  }
+
+  /* HEADER */
+  .header {
+    text-align: center;
+    margin-bottom: 44px;
+    position: relative;
+  }
+  .header::after {
+    content: '';
+    display: block;
+    width: 200px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--byd), var(--cobalt));
+    margin: 18px auto 0;
+    border-radius: 2px;
+  }
+  .header-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .header h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(32px, 5vw, 58px);
+    letter-spacing: 2px;
+    line-height: 1;
+    color: var(--white);
+  }
+  .header h1 span.byd-color { color: var(--byd); }
+  .header h1 span.cobalt-color { color: var(--cobalt); }
+  .header-sub {
+    font-size: 14px;
+    color: var(--muted);
+    margin-top: 10px;
+    letter-spacing: 0.5px;
+  }
+
+  /* CAR BANNERS */
+  .car-banners {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .car-banner {
+    border-radius: 12px;
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+  .car-banner.byd-banner {
+    background: linear-gradient(120deg, #00e5a015 0%, #003d2a 100%);
+    border: 1px solid var(--byd);
+  }
+  .car-banner.cobalt-banner {
+    background: linear-gradient(120deg, #ff5c3515 0%, #3d1500 100%);
+    border: 1px solid var(--cobalt);
+  }
+  .car-icon {
+    font-size: 42px;
+    flex-shrink: 0;
+  }
+  .car-info h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 1.5px;
+    line-height: 1.1;
+  }
+  .car-info p {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+  .byd-banner .car-info h2 { color: var(--byd); }
+  .cobalt-banner .car-info h2 { color: var(--cobalt); }
+  .car-badge {
+    margin-left: auto;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .byd-badge { background: var(--byd); color: #001a10; }
+  .cobalt-badge { background: var(--cobalt); color: #1a0000; }
+
+  /* SECTION HEADERS */
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 2px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    padding-left: 12px;
+    border-left: 3px solid var(--gold);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* COMPARISON TABLE */
+  .comp-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .comp-table thead tr {
+    background: var(--surface2);
+  }
+  .comp-table thead th {
+    padding: 12px 16px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-align: left;
+  }
+  .th-item { color: var(--muted); width: 28%; }
+  .th-byd { color: var(--byd); width: 36%; }
+  .th-cobalt { color: var(--cobalt); width: 36%; }
+  .comp-table tbody tr {
+    border-bottom: 1px solid var(--border);
+    transition: background 0.2s;
+  }
+  .comp-table tbody tr:hover { background: #ffffff06; }
+  .comp-table tbody tr:last-child { border-bottom: none; }
+  .comp-table td {
+    padding: 12px 16px;
+    font-size: 13px;
+    vertical-align: middle;
+    line-height: 1.5;
+  }
+  .td-item {
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background: var(--surface);
+  }
+  .td-byd { background: var(--byd-dim); color: #c0fff0; }
+  .td-cobalt { background: var(--cobalt-dim); color: #ffc5b5; }
+  .val-big {
+    font-family: 'Space Mono', monospace;
+    font-size: 15px;
+    font-weight: 700;
+  }
+  .byd-big { color: var(--byd); }
+  .cobalt-big { color: var(--cobalt); }
+  .tag-good {
+    display: inline-block;
+    background: #00e5a030;
+    color: var(--byd);
+    border-radius: 4px;
+    padding: 1px 7px;
+    font-size: 11px;
+    font-weight: 700;
+    margin-left: 4px;
+  }
+  .tag-bad {
+    display: inline-block;
+    background: #ff5c3530;
+    color: var(--cobalt);
+    border-radius: 4px;
+    padding: 1px 7px;
+    font-size: 11px;
+    font-weight: 700;
+    margin-left: 4px;
+  }
+  .tag-warn {
+    display: inline-block;
+    background: #ffd16630;
+    color: var(--gold);
+    border-radius: 4px;
+    padding: 1px 7px;
+    font-size: 11px;
+    font-weight: 700;
+    margin-left: 4px;
+  }
+  .strike { text-decoration: line-through; color: var(--muted); font-size: 11px; }
+
+  /* KM COST HIGHLIGHT */
+  .km-highlight {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+  .km-box {
+    border-radius: 12px;
+    padding: 22px 24px;
+    text-align: center;
+  }
+  .km-box.byd-km { background: linear-gradient(135deg, #00e5a025, #003d2a60); border: 1px solid var(--byd); }
+  .km-box.cobalt-km { background: linear-gradient(135deg, #ff5c3525, #3d150060); border: 1px solid var(--cobalt); }
+  .km-box .km-label { font-size: 11px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
+  .km-box .km-price {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 52px;
+    letter-spacing: 1px;
+    line-height: 1;
+  }
+  .km-box .km-unit { font-size: 13px; color: var(--muted); margin-top: 4px; }
+  .byd-km .km-price { color: var(--byd); }
+  .cobalt-km .km-price { color: var(--cobalt); }
+  .km-vs {
+    text-align: center;
+    font-family: 'Bebas Neue', sans-serif;
+  }
+  .km-vs .vs-text { font-size: 28px; color: var(--muted); }
+  .km-vs .vs-badge {
+    margin-top: 8px;
+    background: var(--gold);
+    color: #1a1000;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 5px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+    display: block;
+    letter-spacing: 0.5px;
+  }
+
+  /* MONTHLY GRID */
+  .monthly-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 30px;
+  }
+  .monthly-card {
+    background: var(--surface);
+    border-radius: 12px;
+    padding: 20px 22px;
+    border: 1px solid var(--border);
+  }
+  .monthly-card h4 {
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 14px;
+  }
+  .monthly-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+  }
+  .monthly-row:last-child { border-bottom: none; }
+  .monthly-row .label { color: var(--muted); }
+  .monthly-row .byd-val { color: var(--byd); font-family: 'Space Mono', monospace; font-weight: 700; font-size: 14px; }
+  .monthly-row .cobalt-val { color: var(--cobalt); font-family: 'Space Mono', monospace; font-weight: 700; font-size: 14px; }
+  .monthly-row .economy-val { color: var(--gold); font-family: 'Space Mono', monospace; font-weight: 700; font-size: 14px; }
+
+  /* SAVINGS CALLOUT */
+  .savings-callout {
+    background: linear-gradient(120deg, #001a10, #003d2a);
+    border: 2px solid var(--byd);
+    border-radius: 14px;
+    padding: 24px 30px;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+  .savings-icon { font-size: 48px; flex-shrink: 0; }
+  .savings-text h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px;
+    letter-spacing: 2px;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .savings-text .savings-big {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 40px;
+    color: var(--byd);
+    letter-spacing: 1px;
+    line-height: 1;
+  }
+  .savings-text p { font-size: 13px; color: var(--muted); margin-top: 4px; }
+  .savings-breakdown {
+    margin-left: auto;
+    text-align: right;
+    flex-shrink: 0;
+  }
+  .savings-breakdown .sb-item { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+  .savings-breakdown .sb-item span { color: var(--byd); font-weight: 700; font-family: 'Space Mono', monospace; }
+
+  /* MAINTENANCE SECTIONS */
+  .maint-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 30px;
+  }
+  .maint-card {
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid;
+  }
+  .maint-card.byd-maint { background: var(--byd-dim); border-color: var(--byd); }
+  .maint-card.cobalt-maint { background: var(--cobalt-dim); border-color: var(--cobalt); }
+  .maint-card h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 17px;
+    letter-spacing: 1.5px;
+    margin-bottom: 14px;
+  }
+  .byd-maint h3 { color: var(--byd); }
+  .cobalt-maint h3 { color: var(--cobalt); }
+  .maint-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid #ffffff10;
+    font-size: 12.5px;
+  }
+  .maint-row:last-child { border-bottom: none; }
+  .maint-row .maint-icon { width: 20px; flex-shrink: 0; text-align: center; margin-top: 1px; }
+  .maint-row .maint-label { flex: 1; color: var(--text); }
+  .maint-row .maint-val { font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; white-space: nowrap; }
+  .byd-maint .maint-val { color: var(--byd); }
+  .cobalt-maint .maint-val { color: var(--cobalt); }
+  .maint-note { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+  /* PARTS TABLE */
+  .parts-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    overflow: hidden;
+    font-size: 13px;
+  }
+  .parts-table thead {
+    background: var(--surface2);
+  }
+  .parts-table thead th {
+    padding: 11px 14px;
+    text-align: left;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .parts-table thead .th-p-item { color: var(--muted); width: 30%; }
+  .parts-table thead .th-p-byd { color: var(--byd); width: 35%; }
+  .parts-table thead .th-p-cobalt { color: var(--cobalt); width: 35%; }
+  .parts-table tbody tr { border-bottom: 1px solid var(--border); }
+  .parts-table tbody tr:last-child { border-bottom: none; }
+  .parts-table tbody td {
+    padding: 11px 14px;
+    vertical-align: middle;
+  }
+  .td-p-item { background: var(--surface); color: var(--muted); font-size: 12px; font-weight: 500; }
+  .td-p-byd { background: var(--byd-dim); color: #c0fff0; }
+  .td-p-cobalt { background: var(--cobalt-dim); color: #ffc5b5; }
+  .noexist {
+    display: inline-block;
+    background: #00e5a020;
+    color: var(--byd);
+    border-radius: 4px;
+    padding: 2px 8px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+
+  /* PROBLEMS */
+  .problems-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 30px;
+  }
+  .problems-card {
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid;
+  }
+  .problems-card.byd-prob { background: var(--byd-dim); border-color: var(--byd); }
+  .problems-card.cobalt-prob { background: var(--cobalt-dim); border-color: var(--cobalt); }
+  .problems-card h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px;
+    letter-spacing: 1.5px;
+    margin-bottom: 12px;
+  }
+  .byd-prob h3 { color: var(--byd); }
+  .cobalt-prob h3 { color: var(--cobalt); }
+  .prob-item {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    margin-bottom: 8px;
+    font-size: 12.5px;
+    line-height: 1.5;
+  }
+  .prob-icon { flex-shrink: 0; width: 18px; }
+
+  /* UBER SECTION */
+  .uber-section {
+    background: linear-gradient(135deg, #0d1f3c, #13102e);
+    border: 1px solid #2a3a6a;
+    border-radius: 14px;
+    padding: 28px;
+    margin-bottom: 30px;
+  }
+  .uber-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 18px;
+  }
+  .uber-card {
+    border-radius: 10px;
+    padding: 20px;
+  }
+  .uber-card.uber-byd { background: #00e5a015; border: 1px solid var(--byd); }
+  .uber-card.uber-cobalt { background: #ff5c3515; border: 1px solid var(--cobalt); }
+  .uber-card h4 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px;
+    letter-spacing: 1.5px;
+    margin-bottom: 14px;
+  }
+  .uber-byd h4 { color: var(--byd); }
+  .uber-cobalt h4 { color: var(--cobalt); }
+  .uber-line {
+    display: flex;
+    justify-content: space-between;
+    padding: 7px 0;
+    border-bottom: 1px solid #ffffff10;
+    font-size: 12.5px;
+  }
+  .uber-line:last-child { border-bottom: none; }
+  .uber-line .ul-label { color: var(--muted); }
+  .uber-line .ul-val { font-family: 'Space Mono', monospace; font-weight: 700; font-size: 12px; }
+  .uber-byd .ul-val { color: var(--byd); }
+  .uber-cobalt .ul-val { color: var(--cobalt); }
+  .uber-profit {
+    font-size: 18px !important;
+  }
+  .uber-profit.ul-val { font-size: 18px !important; }
+  .profit-highlight {
+    background: var(--byd);
+    color: #001a10;
+    border-radius: 6px;
+    padding: 2px 8px;
+    font-family: 'Space Mono', monospace;
+    font-size: 15px;
+    font-weight: 700;
+  }
+  .uber-diff-box {
+    grid-column: 1 / -1;
+    background: linear-gradient(120deg, #ffd16615, #ffd16605);
+    border: 1px solid var(--gold);
+    border-radius: 10px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .uber-diff-box .ud-text { font-size: 13px; color: var(--muted); }
+  .uber-diff-box .ud-val {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    color: var(--gold);
+  }
+
+  /* TOTAL COSTS */
+  .total-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 30px;
+  }
+  .total-card {
+    border-radius: 12px;
+    padding: 22px;
+    border: 1px solid;
+    text-align: center;
+  }
+  .total-card.tc-byd { background: var(--byd-dim); border-color: var(--byd); }
+  .total-card.tc-cobalt { background: var(--cobalt-dim); border-color: var(--cobalt); }
+  .total-card h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 14px;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    color: var(--muted);
+  }
+  .total-big {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px;
+    letter-spacing: 1px;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .tc-byd .total-big { color: var(--byd); }
+  .tc-cobalt .total-big { color: var(--cobalt); }
+  .total-sub { font-size: 11px; color: var(--muted); }
+  .total-items { margin-top: 14px; }
+  .ti-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11.5px;
+    padding: 5px 0;
+    border-bottom: 1px solid #ffffff10;
+  }
+  .ti-row:last-child { border-bottom: none; }
+  .ti-label { color: var(--muted); }
+  .ti-val { font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; }
+  .tc-byd .ti-val { color: var(--byd); }
+  .tc-cobalt .ti-val { color: var(--cobalt); }
+
+  /* GUARANTEES */
+  .guarantee-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 30px;
+  }
+  .guarantee-card {
+    border-radius: 12px;
+    padding: 18px 20px;
+    border: 1px solid;
+  }
+  .guarantee-card.gc-byd { background: var(--byd-dim); border-color: var(--byd); }
+  .guarantee-card.gc-cobalt { background: var(--cobalt-dim); border-color: var(--cobalt); }
+  .guarantee-card h4 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 15px;
+    letter-spacing: 1.5px;
+    margin-bottom: 12px;
+  }
+  .gc-byd h4 { color: var(--byd); }
+  .gc-cobalt h4 { color: var(--cobalt); }
+  .g-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 7px 0;
+    border-bottom: 1px solid #ffffff10;
+    font-size: 12.5px;
+  }
+  .g-item:last-child { border-bottom: none; }
+  .g-label { color: var(--muted); }
+  .g-val { font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; }
+  .gc-byd .g-val { color: var(--byd); }
+  .gc-cobalt .g-val { color: var(--cobalt); }
+
+  /* FOOTER */
+  .footer {
+    text-align: center;
+    padding: 20px;
+    border-top: 1px solid var(--border);
+    font-size: 10.5px;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  /* DIVIDER */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+    margin: 32px 0;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 700px) {
+    .car-banners, .monthly-grid, .maint-grid, .problems-grid,
+    .uber-grid, .total-grid, .guarantee-grid { grid-template-columns: 1fr; }
+    .km-highlight { grid-template-columns: 1fr; }
+    .km-vs { display: none; }
+    .savings-callout { flex-direction: column; text-align: center; }
+    .savings-breakdown { margin-left: 0; text-align: center; }
+    .uber-diff-box { flex-direction: column; gap: 8px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-label">Análise Financeira Completa · Abril 2026</div>
+    <h1><span class="byd-color">BYD Dolphin Mini</span> <span style="color:var(--muted)">vs</span> <span class="cobalt-color">Cobalt LTZ AT 2014</span></h1>
+    <div class="header-sub">Comparativo de custos, manutenção e rentabilidade para trabalho como motorista de app</div>
+  </div>
+
+  <!-- CAR BANNERS -->
+  <div class="car-banners">
+    <div class="car-banner byd-banner">
+      <div class="car-icon">⚡</div>
+      <div class="car-info">
+        <h2>BYD Dolphin Mini</h2>
+        <p>Elétrico · Motor 75cv · Bateria 38 kWh · 280 km autonomia</p>
+      </div>
+      <div class="car-badge byd-badge">ELÉTRICO</div>
+    </div>
+    <div class="car-banner cobalt-banner">
+      <div class="car-icon">⛽</div>
+      <div class="car-info">
+        <h2>Chevrolet Cobalt LTZ AT 2014</h2>
+        <p>Flex 1.8 · Câmbio automático 6 marchas · Tanque 54 L</p>
+      </div>
+      <div class="car-badge cobalt-badge">GASOLINA FLEX</div>
+    </div>
+  </div>
+
+  <!-- SECTION 1: CUSTO POR KM -->
+  <div class="section-title">💡 Custo por Quilômetro Rodado</div>
+  <div class="km-highlight">
+    <div class="km-box byd-km">
+      <div class="km-label">BYD Dolphin Mini</div>
+      <div class="km-price">R$0,11</div>
+      <div class="km-unit">por km · energia a R$0,80/kWh · 13,5 kWh/100km (Inmetro)</div>
+    </div>
+    <div class="km-vs">
+      <div class="vs-text">VS</div>
+      <span class="vs-badge">BYD 5,5× mais barato por km</span>
+    </div>
+    <div class="km-box cobalt-km">
+      <div class="km-label">Cobalt 1.8 AT 2014</div>
+      <div class="km-price">R$0,60</div>
+      <div class="km-unit">por km · gasolina a R$6,30/L · 9 km/L real urbano</div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: CONSUMO BÁSICO -->
+  <div class="section-title">📊 Dados Técnicos de Consumo</div>
+  <table class="comp-table">
+    <thead>
+      <tr>
+        <th class="th-item">Item</th>
+        <th class="th-byd">⚡ BYD Dolphin Mini</th>
+        <th class="th-cobalt">⛽ Cobalt LTZ AT 2014</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="td-item">Combustível</td>
+        <td class="td-byd">Energia elétrica <span class="tag-good">SEM EMISSÕES</span></td>
+        <td class="td-cobalt">Gasolina / Etanol (Flex)</td>
+      </tr>
+      <tr>
+        <td class="td-item">Eficiência Inmetro</td>
+        <td class="td-byd"><span class="val-big byd-big">13,5 kWh/100km</span><br><span style="font-size:11px;color:var(--muted)">= 7,4 km/kWh · 280 km/carga</span></td>
+        <td class="td-cobalt"><span class="val-big cobalt-big">9 km/L cidade real</span><br><span style="font-size:11px;color:var(--muted)">12,3 km/L estrada · média mista ~10,5 km/L</span></td>
+      </tr>
+      <tr>
+        <td class="td-item">Preço do combustível</td>
+        <td class="td-byd"><span class="val-big byd-big">R$0,80/kWh</span> <span class="tag-good">TARIFA RESIDENCIAL</span></td>
+        <td class="td-cobalt"><span class="val-big cobalt-big">R$6,30/L</span> <span class="tag-bad">ANP ABR/2026</span></td>
+      </tr>
+      <tr>
+        <td class="td-item">Custo por km</td>
+        <td class="td-byd"><span class="val-big byd-big">R$0,108/km</span> <span class="tag-good">✔ MAIS BARATO</span></td>
+        <td class="td-cobalt"><span class="val-big cobalt-big">R$0,600/km</span> <span class="tag-bad">✘ 5,5× mais caro</span></td>
+      </tr>
+      <tr>
+        <td class="td-item">Capacidade</td>
+        <td class="td-byd">Bateria 38 kWh · recarga ~5-6h em casa</td>
+        <td class="td-cobalt">Tanque 54 litros · abastece em 5 min</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- SECTION 3: GASTOS MENSAIS -->
+  <div class="section-title">💸 Gastos com Combustível/Energia</div>
+  <div class="monthly-grid">
+    <div class="monthly-card">
+      <h4>📍 Uso Normal — 1.500 km/mês</h4>
+      <div class="monthly-row"><span class="label">BYD — energia mensal</span><span class="byd-val">R$162,00</span></div>
+      <div class="monthly-row"><span class="label">Cobalt — gasolina mensal</span><span class="cobalt-val">R$900,00</span></div>
+      <div class="monthly-row"><span class="label">Economia mensal</span><span class="economy-val">R$738,00</span></div>
+      <div class="monthly-row"><span class="label">Economia anual</span><span class="economy-val">R$8.856,00</span></div>
+    </div>
+    <div class="monthly-card">
+      <h4>🚗 Uso Uber — 3.000 km/mês (8h/dia)</h4>
+      <div class="monthly-row"><span class="label">BYD — energia mensal</span><span class="byd-val">R$324,00</span></div>
+      <div class="monthly-row"><span class="label">Cobalt — gasolina mensal</span><span class="cobalt-val">R$1.800,00</span></div>
+      <div class="monthly-row"><span class="label">Economia mensal</span><span class="economy-val">R$1.476,00</span></div>
+      <div class="monthly-row"><span class="label">Economia anual</span><span class="economy-val">R$17.712,00</span></div>
+    </div>
+  </div>
+
+  <!-- SAVINGS CALLOUT -->
+  <div class="savings-callout">
+    <div class="savings-icon">🏆</div>
+    <div class="savings-text">
+      <h3>Economia Total em 5 Anos de Uber</h3>
+      <div class="savings-big">R$88.560,00</div>
+      <p>Somente em combustível vs gasolina · base 3.000 km/mês</p>
+    </div>
+    <div class="savings-breakdown">
+      <div class="sb-item">1 ano de Uber: <span>R$17.712</span></div>
+      <div class="sb-item">2 anos de Uber: <span>R$35.424</span></div>
+      <div class="sb-item">3 anos de Uber: <span>R$53.136</span></div>
+      <div class="sb-item">5 anos de Uber: <span>R$88.560</span></div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- SECTION 4: REVISÕES -->
+  <div class="section-title">🔧 Plano de Revisões Oficiais</div>
+  <div class="maint-grid">
+    <div class="maint-card byd-maint">
+      <h3>⚡ BYD Dolphin Mini — Revisões</h3>
+      <div class="maint-row">
+        <div class="maint-icon">📅</div>
+        <div class="maint-label"><strong>Frequência</strong><br><span class="maint-note">A cada 20.000 km ou 12 meses (o que ocorrer primeiro)</span></div>
+      </div>
+      <div class="maint-row">
+        <div class="maint-icon">1️⃣</div>
+        <div class="maint-label">Revisão simples (20k, 60k, 100k, 140k, 180k km)</div>
+        <div class="maint-val">R$370</div>
+      </div>
+      <div class="maint-row">
+        <div class="maint-icon">2️⃣</div>
+        <div class="maint-label">Revisão completa (40k, 80k, 120k, 160k, 200k km)</div>
+        <div class="maint-val">R$1.000</div>
+      </div>
+      <div class="maint-row">
+        <div class="maint-icon">📐</div>
+        <div class="maint-label">Custo médio por revisão</div>
+        <div class="maint-val">~R$685</div>
+      </div>
+      <div class="maint-row">
+        <div class="maint-icon">🚗</div>
+        <div class="maint-label"><strong>Custo anual estimado (uso normal)</strong></div>
+        <div class="maint-val">~R$685/ano</div>
+      </div>
+      <div class="maint-row">
+        <div class="maint-icon">🔁</div>
+        <div class="maint-label"><strong>Custo anual estimado (uso Uber intenso)</strong></div>
+        <div class="maint-val">~R$1.370/ano</div>
+      </div>
+      <div class="maint-row" style="margin-top:8px;padding-top:10px;border-top:1px solid var(--byd)30;">
+        <div class="maint-icon">✅</div>
+        <div class="maint-label" style="color:var(--byd)"><strong>Sem troca de óleo · Sem filtro de combustível · Sem velas · Sem correia dentada</strong></div>
+      </div>
+    </div>
+
+    <div class="maint-card cobalt-maint">
+      <h3>⛽ Cobalt 1.8 AT 2014 — Revisões</h3>
+      <div class="maint-row">
+        <div class="maint-icon">📅</div>
+        <div class="maint-label"><strong>Frequência</strong><br><span class="maint-note">A cada 10.000 km ou 12 meses (o que ocorrer primeiro)</span></div>
+      </div>
+      <div class="maint-row">
+        <div class="maint-icon">🔩</div>
+        <div class="maint-label">Revisão básica (10k, 20k, 50k km) — óleo + filtros</div>
+        <div class="maint-val">R$400–600</div>
+      </div>
+      <div class="maint-row">
+        <div class="maint-icon">⚙️</div>
+        <div class="maint-label">Revisão completa (30k, 60k km) — + velas, correias</div>
+        <div class="maint-val">R$800–1.200</div>
+      </div>
+      <div class="maint-row">
+        <div class="maint-icon">⚠️</div>
+        <div class="maint-label"><strong>Correia dentada (a cada 60.000 km)</strong><br><span class="maint-note">Risco grave de dano ao motor se não trocada</span></div>
+        <div class="maint-val">R$800–1.200</div>
+      </div>
+      <div class="maint-row">
+        <div class="maint-icon">🛢️</div>
+        <div class="maint-label">Troca de óleo (a cada 10.000 km)</div>
+        <div class="maint-val">R$180–300</div>
+      </div>
+      <div class="maint-row">
+        <div class="maint-icon">🚗</div>
+        <div class="maint-label"><strong>Custo anual estimado (uso Uber)</strong></div>
+        <div class="maint-val">R$2.000–3.000</div>
+      </div>
+      <div class="maint-row" style="margin-top:8px;padding-top:10px;border-top:1px solid var(--cobalt)30;">
+        <div class="maint-icon">❌</div>
+        <div class="maint-label" style="color:var(--cobalt)"><strong>Carro de 10 anos: fora de garantia de fábrica — reparos 100% por conta própria</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 5: PEÇAS E COMPONENTES -->
+  <div class="section-title">🔩 Troca de Peças — Frequência e Custo</div>
+  <table class="parts-table">
+    <thead>
+      <tr>
+        <th class="th-p-item">Componente</th>
+        <th class="th-p-byd">⚡ BYD Dolphin Mini</th>
+        <th class="th-p-cobalt">⛽ Cobalt LTZ AT 2014</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="td-p-item">Óleo do motor</td>
+        <td class="td-p-byd"><span class="noexist">NÃO EXISTE</span><br><span style="font-size:11px;color:var(--muted)">Motor elétrico não usa óleo</span></td>
+        <td class="td-p-cobalt">⚠️ A cada <strong>10.000 km</strong><br><span style="font-size:11px">~R$180–300 por troca · 3× ao ano no Uber</span></td>
+      </tr>
+      <tr>
+        <td class="td-p-item">Filtro de óleo</td>
+        <td class="td-p-byd"><span class="noexist">NÃO EXISTE</span></td>
+        <td class="td-p-cobalt">A cada 10.000 km · <strong>~R$50</strong></td>
+      </tr>
+      <tr>
+        <td class="td-p-item">Filtro de combustível</td>
+        <td class="td-p-byd"><span class="noexist">NÃO EXISTE</span></td>
+        <td class="td-p-cobalt">A cada 30.000 km · <strong>~R$60–80</strong></td>
+      </tr>
+      <tr>
+        <td class="td-p-item">Velas de ignição</td>
+        <td class="td-p-byd"><span class="noexist">NÃO EXISTE</span></td>
+        <td class="td-p-cobalt">A cada 30.000 km · <strong>~R$120–200</strong></td>
+      </tr>
+      <tr>
+        <td class="td-p-item">Correia dentada</td>
+        <td class="td-p-byd"><span class="noexist">NÃO EXISTE</span></td>
+        <td class="td-p-cobalt">⚠️ A cada <strong>60.000 km ou 5 anos</strong><br><span style="font-size:11px">~R$800–1.200 · falha = motor destruído</span></td>
+      </tr>
+      <tr>
+        <td class="td-p-item">Pastilha de freio dianteira</td>
+        <td class="td-p-byd">✅ A cada <strong>60.000–80.000 km</strong><br><span style="font-size:11px;color:var(--muted)">Freio regenerativo reduz desgaste · ~R$200</span></td>
+        <td class="td-p-cobalt">A cada <strong>30.000–40.000 km</strong><br><span style="font-size:11px">~R$200 · desgaste maior em stop-and-go</span></td>
+      </tr>
+      <tr>
+        <td class="td-p-item">Disco de freio</td>
+        <td class="td-p-byd">A cada 100.000–120.000 km · <strong>~R$400</strong></td>
+        <td class="td-p-cobalt">A cada 60.000–80.000 km · <strong>~R$400</strong></td>
+      </tr>
+      <tr>
+        <td class="td-p-item">Pneus (jogo com 4)</td>
+        <td class="td-p-byd">A cada <strong>35.000–40.000 km</strong><br><span style="font-size:11px">~R$1.600 (pneus 195/55 R16)</span></td>
+        <td class="td-p-cobalt">A cada <strong>25.000–35.000 km</strong><br><span style="font-size:11px">~R$1.200–1.400</span></td>
+      </tr>
+      <tr>
+        <td class="td-p-item">Amortecedores</td>
+        <td class="td-p-byd">A cada 80.000–100.000 km · <strong>~R$600–900</strong></td>
+        <td class="td-p-cobalt">⚠️ Desgaste relatado a partir de <strong>40.000–60.000 km</strong><br><span style="font-size:11px">~R$600–900 · problema recorrente</span></td>
+      </tr>
+      <tr>
+        <td class="td-p-item">Fluido de freio</td>
+        <td class="td-p-byd">A cada 2 anos · <strong>~R$80</strong></td>
+        <td class="td-p-cobalt">A cada 2 anos · <strong>~R$80</strong></td>
+      </tr>
+      <tr>
+        <td class="td-p-item">Fluido de câmbio</td>
+        <td class="td-p-byd"><span class="noexist">NÃO EXISTE</span><br><span style="font-size:11px;color:var(--muted)">Câmbio elétrico direto</span></td>
+        <td class="td-p-cobalt">A cada 60.000 km · <strong>~R$200</strong><br><span style="font-size:11px">Câmbio automático 6 marchas</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- SECTION 6: PROBLEMAS CONHECIDOS -->
+  <div class="section-title">⚠️ Problemas Conhecidos e Pontos de Atenção</div>
+  <div class="problems-grid">
+    <div class="problems-card cobalt-prob">
+      <h3>⛽ Cobalt 1.8 AT 2014 — Problemas Relatados</h3>
+      <div class="prob-item"><span class="prob-icon">❌</span><span><strong>Consumo real decepcionante:</strong> proprietários relatam 5,9–8,9 km/L em São Paulo. Longe dos dados oficiais — problema estrutural do motor datado</span></div>
+      <div class="prob-item"><span class="prob-icon">❌</span><span><strong>Suspensão dianteira barulhenta</strong> a partir de 40.000–60.000 km. Desgaste precoce relatado amplamente em fóruns</span></div>
+      <div class="prob-item"><span class="prob-icon">❌</span><span><strong>Correia dentada:</strong> risco grave de falha no motor se não trocada pontualmente a cada 60.000 km ou 5 anos</span></div>
+      <div class="prob-item"><span class="prob-icon">❌</span><span><strong>Sistema eletrônico frágil:</strong> sensor de estacionamento, módulo de rádio MyLink com falhas frequentes</span></div>
+      <div class="prob-item"><span class="prob-icon">❌</span><span><strong>Grilinhos e rangidos no painel</strong> após quilometragem elevada. Plásticos internos com baixa durabilidade</span></div>
+      <div class="prob-item"><span class="prob-icon">❌</span><span><strong>Freios com desgaste acelerado</strong> em uso urbano intenso (Uber). Pastilhas podem exigir troca mais frequente</span></div>
+      <div class="prob-item"><span class="prob-icon">❌</span><span><strong>Carro de 10 anos</strong> sem garantia de fábrica: qualquer reparo inesperado sai 100% do bolso. Alto risco de surpresas caras</span></div>
+      <div class="prob-item"><span class="prob-icon">❌</span><span><strong>Câmbio automático:</strong> manutenção mais custosa e complexa do que versão manual. Historicamente menos confiável em uso intenso</span></div>
+    </div>
+    <div class="problems-card byd-prob">
+      <h3>⚡ BYD Dolphin Mini — Pontos de Atenção</h3>
+      <div class="prob-item"><span class="prob-icon">⚠️</span><span><strong>Precisa de carregador em casa:</strong> fundamental instalar tomada de 220V ou wallbox antes de comprar. Custo: R$800–2.000</span></div>
+      <div class="prob-item"><span class="prob-icon">⚠️</span><span><strong>Garantia comercial reduzida</strong> (vs uso particular): Veículo 2 anos/100k km; Bateria 5 anos/150k km; Motor elétrico 6 anos/150k km</span></div>
+      <div class="prob-item"><span class="prob-icon">⚠️</span><span><strong>Rede de assistência em expansão:</strong> menos oficinas que GM. Em cidades menores pode haver dificuldade de atendimento</span></div>
+      <div class="prob-item"><span class="prob-icon">⚠️</span><span><strong>Porta-malas reduzido:</strong> 230 litros (vs ~500L do Cobalt). Limitação para quem carrega muito</span></div>
+      <div class="prob-item"><span class="prob-icon">⚠️</span><span><strong>Versão para Uber/99:</strong> apenas a de 5 lugares (R$122.800) é aceita nas plataformas. Verificar disponibilidade na sua cidade</span></div>
+      <div class="prob-item"><span class="prob-icon">✅</span><span><strong>Silencioso e confortável:</strong> passageiros apreciam — pode favorecer avaliações melhores e mais corridas</span></div>
+      <div class="prob-item"><span class="prob-icon">✅</span><span><strong>Ar-condicionado</strong> sem impacto no "combustível" como em carros a gasolina. Motor elétrico não sobrecarrega</span></div>
+      <div class="prob-item"><span class="prob-icon">✅</span><span><strong>Depreciação controlada:</strong> Fipe 2024 usado ~R$100k vs novo R$120k = ~16% em 1 ano. Similar a carros populares</span></div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- SECTION 7: CUSTO TOTAL OPERACIONAL -->
+  <div class="section-title">📈 Custo Total Operacional Anual (Uso Uber · 3.000 km/mês)</div>
+  <div class="total-grid">
+    <div class="total-card tc-byd">
+      <h3>⚡ BYD DOLPHIN MINI — TOTAL/ANO</h3>
+      <div class="total-big">R$6.191</div>
+      <div class="total-sub">Custo operacional anual completo · uso Uber</div>
+      <div class="total-items">
+        <div class="ti-row"><span class="ti-label">Energia (3.000 km/mês × 12)</span><span class="ti-val">R$3.888</span></div>
+        <div class="ti-row"><span class="ti-label">Revisões (2×/ano uso Uber)</span><span class="ti-val">R$1.370</span></div>
+        <div class="ti-row"><span class="ti-label">Pneus (proporcional/ano)</span><span class="ti-val">R$480</span></div>
+        <div class="ti-row"><span class="ti-label">Fluidos e manutenção extra</span><span class="ti-val">R$453</span></div>
+        <div class="ti-row" style="font-weight:700"><span class="ti-label">TOTAL</span><span class="ti-val" style="font-size:14px">R$6.191/ano</span></div>
+      </div>
+    </div>
+    <div class="total-card tc-cobalt">
+      <h3>⛽ COBALT 1.8 AT 2014 — TOTAL/ANO</h3>
+      <div class="total-big">R$26.060</div>
+      <div class="total-sub">Custo operacional anual completo · uso Uber</div>
+      <div class="total-items">
+        <div class="ti-row"><span class="ti-label">Gasolina (3.000 km/mês × 12)</span><span class="ti-val">R$21.600</span></div>
+        <div class="ti-row"><span class="ti-label">Revisões + troca de óleo</span><span class="ti-val">R$2.400</span></div>
+        <div class="ti-row"><span class="ti-label">Pneus (proporcional/ano)</span><span class="ti-val">R$560</span></div>
+        <div class="ti-row"><span class="ti-label">Manutenção extra / imprevistos</span><span class="ti-val">R$1.500</span></div>
+        <div class="ti-row" style="font-weight:700"><span class="ti-label">TOTAL</span><span class="ti-val" style="font-size:14px">R$26.060/ano</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 8: UBER PROFITABILITY -->
+  <div class="section-title">🚗 Simulação de Rentabilidade no Uber</div>
+  <div class="uber-section">
+    <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Base: 8 horas/dia · 22 dias/mês · ~3.000 km/mês · Receita bruta referenciada em vlogs de motoristas</div>
+    <div class="uber-grid">
+      <div class="uber-card uber-byd">
+        <h4>⚡ BYD Dolphin Mini</h4>
+        <div class="uber-line"><span class="ul-label">Receita bruta estimada/mês</span><span class="ul-val">R$8.800 – R$13.200</span></div>
+        <div class="uber-line"><span class="ul-label">Custo operacional mensal</span><span class="ul-val">R$516</span></div>
+        <div class="uber-line"><span class="ul-label">Seguro estimado/mês</span><span class="ul-val">~R$300</span></div>
+        <div class="uber-line"><span class="ul-label">Outros (IPVA, licenc., etc.)</span><span class="ul-val">~R$200</span></div>
+        <div class="uber-line" style="padding-top:12px;border-top:1px solid var(--byd)40;">
+          <span class="ul-label" style="color:var(--text);font-weight:700">💰 LUCRO LÍQUIDO ESTIMADO</span>
+          <span class="ul-val uber-profit" style="font-size:17px;color:var(--byd)">R$7.784 – R$12.184</span>
+        </div>
+      </div>
+      <div class="uber-card uber-cobalt">
+        <h4>⛽ Cobalt LTZ AT 2014</h4>
+        <div class="uber-line"><span class="ul-label">Receita bruta estimada/mês</span><span class="ul-val">R$8.800 – R$13.200</span></div>
+        <div class="uber-line"><span class="ul-label">Custo operacional mensal</span><span class="ul-val">R$2.172</span></div>
+        <div class="uber-line"><span class="ul-label">Seguro estimado/mês</span><span class="ul-val">~R$250</span></div>
+        <div class="uber-line"><span class="ul-label">Outros (IPVA, licenc., etc.)</span><span class="ul-val">~R$150</span></div>
+        <div class="uber-line" style="padding-top:12px;border-top:1px solid var(--cobalt)40;">
+          <span class="ul-label" style="color:var(--text);font-weight:700">💰 LUCRO LÍQUIDO ESTIMADO</span>
+          <span class="ul-val uber-profit" style="font-size:17px;color:var(--cobalt)">R$6.228 – R$10.628</span>
+        </div>
+      </div>
+      <div class="uber-diff-box">
+        <div>
+          <div class="ud-text" style="font-size:14px;font-weight:700;color:var(--text)">🏆 O BYD Dolphin Mini gera mais lucro todo mês</div>
+          <div class="ud-text">Diferença de custo operacional que vai direto para o seu bolso</div>
+        </div>
+        <div>
+          <div class="ud-val">+R$1.556/mês</div>
+          <div style="font-size:11px;color:var(--muted);text-align:right">= R$18.672/ano a mais</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 9: GARANTIAS -->
+  <div class="section-title">🛡️ Garantias (Uso Comercial / App)</div>
+  <div class="guarantee-grid">
+    <div class="guarantee-card gc-byd">
+      <h4>⚡ BYD Dolphin Mini — Garantias</h4>
+      <div class="g-item"><span class="g-label">Veículo (uso comercial)</span><span class="g-val">2 anos / 100.000 km</span></div>
+      <div class="g-item"><span class="g-label">Bateria de tração</span><span class="g-val">5 anos / 150.000 km ✅</span></div>
+      <div class="g-item"><span class="g-label">Motor elétrico</span><span class="g-val">6 anos / 150.000 km ✅</span></div>
+      <div class="g-item"><span class="g-label">Sistema alta/baixa tensão</span><span class="g-val">5 anos / 150.000 km</span></div>
+      <div class="g-item"><span class="g-label">Tomada de recarga</span><span class="g-val">1 ano</span></div>
+    </div>
+    <div class="guarantee-card gc-cobalt">
+      <h4>⛽ Cobalt LTZ AT 2014 — Garantias</h4>
+      <div class="g-item"><span class="g-label">Garantia de fábrica</span><span class="g-val" style="color:var(--cobalt)">❌ EXPIRADA (carro de 10 anos)</span></div>
+      <div class="g-item"><span class="g-label">Motor / câmbio / suspensão</span><span class="g-val" style="color:var(--cobalt)">❌ Sem cobertura</span></div>
+      <div class="g-item"><span class="g-label">Sistema elétrico</span><span class="g-val" style="color:var(--cobalt)">❌ Sem cobertura</span></div>
+      <div class="g-item"><span class="g-label">Correia dentada (risco grave)</span><span class="g-val" style="color:var(--cobalt)">❌ 100% por conta própria</span></div>
+      <div class="g-item"><span class="g-label">Qualquer reparo imprevisto</span><span class="g-val" style="color:var(--cobalt)">❌ Sai do bolso integralmente</span></div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <strong>Fontes e bases de cálculo:</strong> Preço gasolina: R$6,30/L (ANP, semana de 29/03–04/04/2026) · Tarifa residencial kWh: R$0,80 (informada pelo usuário) · Consumo BYD: 13,5 kWh/100km (PBEV/Inmetro 2024) · Consumo Cobalt: 9 km/L urbano real (relatos de proprietários e combustivel.app) · Revisões BYD: tabela oficial BYD Brasil (2024/2025) · Revisões Cobalt: estimativas baseadas em tabelas de concessionárias GM e peças AcDelco · Estimativas de receita Uber baseadas em relatos de motoristas em vlogs e fóruns (R$400–600/dia em 8h de trabalho) · Problemas Cobalt: fóruns Cobalt Clube, Reclame Aqui, Oficina Brasil · Garantias BYD: site oficial byd.com/br
+  </div>
+
+</div>
+</body>
+</html>
